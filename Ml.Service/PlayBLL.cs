@@ -1,9 +1,9 @@
 ﻿using Amazon.DynamoDBv2.Model;
-using Rby.Data;
-using Rby.IData;
-using Rby.Models;
+using Ml.Data;
+using Ml.IData;
+using Ml.Models;
 
-namespace Rby.Service
+namespace Ml.Service
 {
     public class PlayBLL(IRepository repository)
 	{

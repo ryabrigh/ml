@@ -1,0 +1,35 @@
+GetByIdtest:
+
+{
+  "pathParameters": {
+    "id": "4"
+  }
+}
+
+GetByIdBadId:
+
+{
+  "pathParameters": {
+    "id": "9999"
+  }
+}
+
+Deletetest:
+
+{
+  "pathParameters": {
+    "id": "4"
+  }
+}
+
+Puttest:
+
+{
+  "body": "{\"id\":{\"N\":\"2\"},\"name\":{\"S\":\"testb\"},\"active\":{\"BOOL\":true}}"
+}
+
+Puttestnoid:
+
+{
+  "body": "{\"name\":{\"S\":\"noid\"}}"
+}

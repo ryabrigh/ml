@@ -1,8 +1,8 @@
 ﻿using Amazon.DynamoDBv2.Model;
-using Rby.IData;
-using Rby.Models;
+using Ml.IData;
+using Ml.Models;
 
-namespace Rby.Service
+namespace Ml.Service
 {
     public class ScheduleBLL(IRepository repository)
     {

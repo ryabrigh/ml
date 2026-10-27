@@ -2,12 +2,12 @@ using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Rby.Data;
+using Ml.Data;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
 
-namespace Rby.Service;
+namespace Ml.Service;
 
 public class Function
 {
@@ -37,6 +37,11 @@ public class Function
 
         switch (serviceRequest.ServiceType)
         {
+            case "Exist":
+                context.Logger.LogInformation("Exist request received");
+                response.StatusCode = 200;
+                response.Body = "Lambda function exists";
+                break;
             case "HealthCheck":
                 context.Logger.LogInformation("HealthCheck request received");
                 response = _serviceBLL.GetHealthCheck(serviceRequest.ServiceData, context).GetAwaiter().GetResult();

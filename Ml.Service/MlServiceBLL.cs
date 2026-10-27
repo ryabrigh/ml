@@ -3,13 +3,13 @@ using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Rby.Data;
-using Rby.IData;
-using Rby.Models;
+using Ml.Data;
+using Ml.IData;
+using Ml.Models;
 using System.Globalization;
 using System.Reflection;
 
-namespace Rby.Service
+namespace Ml.Service
 {
     public class RbyServiceBLL(IRepository repository)
 	{

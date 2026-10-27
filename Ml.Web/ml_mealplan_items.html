@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><title>MLMealPlanItems</title>
+	<head>
+		<script src="jquery-3.6.1.js"></script>
+		<script src="ml_mealplan_items.js"></script>
+		<link rel="stylesheet" href="css/site.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+	</head>
+	<body>
+		<h1 class="mlH1" id="MPItemsTitle">ML Meal Plan</h1><a href="index.html" style="padding-left:10px">Back to index</a>
+		<hr>
+		<div class="row" style="padding: 10px">
+			<!--label hidden="true" id="sortField">id_asc</label>
+			<div class="checkbox col-sm-2" style="padding-left: 10px">
+				<label><input type="checkbox" id="showInactive" onclick="GetAll()"> Show Inactive</label>
+			</div-->
+			<div class="col-sm-1">
+				<button class="btn btn-primary" onclick="Submit()" type="button" style="padding-left: 10px;">Submit</button>
+			</div>
+			<div class="col-sm-1">
+				<button class="btn btn-primary" onclick="Random()" type="button" style="padding-left: 10px;">Random</button>
+			</div>
+			<!--div class="col-sm-1">
+				<button class="btn btn-primary" onclick="Print()" type="button" style="padding-left: 10px;">Print</button>
+			</div>
+			<div class="col-sm-1">
+				<button class="btn btn-primary" onclick="Collected()" type="button" style="padding-left: 10px; background-color: green;" >Collected</button>
+			</div-->
+			<!--div class="col-sm-1">
+				<button class="btn btn-primary" onclick="SelectAll()" type="button" style="padding-left: 10px; background-color: green;" >Select All</button>
+			</div-->
+		</div>
+		<div class="row" style="padding: 10px">
+			<div id="dataTable" class="col-sm-12"></div>
+		</div>
+		<div class="row" style="padding-left: 10px;">
+			<div id="listOfMealtypes" class="col-sm-2"></div>
+			<div id="templateTable" class="col-sm-4"></div>
+		</div>
+		<div class="modal"><!-- Place at bottom of page --></div>
+	</body>
+</html>

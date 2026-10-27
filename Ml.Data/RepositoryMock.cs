@@ -4,7 +4,7 @@ using Ml.Models;
 using System.Globalization;
 using System.Reflection;
 
-namespace Rby.Data
+namespace Ml.Data
 {
     public class RepositoryMock : IRepository
     {

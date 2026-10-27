@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"><title>MLAdmin-Product</title>
+<meta name="viewport" content="width=device-width" />
+	<head>
+		<script src="jquery-3.6.1.js"></script>
+		<script src="ml_product_crud.js"></script>
+		<link rel="stylesheet" href="css/site.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+	</head>
+	<body>
+		<h1 class="mlH1">ML Admin - Product</h1><a href="index.html" style="padding-left:10px">Back to index</a>
+		<form class="form-horizontal" style="padding-top: 2%" >
+			<div class="form-group col-xs-12">
+			  <label class="control-label col-sm-1" for="productId">ID:</label>
+			  <div class="col-sm-3">
+				<input type="text" class="form-control" id="productId" readonly="true" >
+			  </div>
+			  <div class="col-sm-1">
+				<button class="btn btn-primary" onclick="Clear()" type="button">Clear Edit Fields</button>
+			  </div>
+			  <div class="col-sm-7"></div>
+			</div>
+			<div class="form-group col-xs-12">
+				<label class="control-label col-sm-1" for="productName">Name:</label>
+				<div class="col-sm-3">
+				  <input type="text" class="form-control" id="productName" >
+				</div>
+				<div class="col-sm-8"></div>
+			  </div>
+			  <div class="form-group col-xs-12">
+				<label class="control-label col-sm-1" for="productAmount">Amount:</label>
+				<div class="col-sm-1">
+				  <input type="text" class="form-control" id="productAmount" >
+				</div>
+				  <div class="col-sm-2">
+					<select class="form-control" id="productPortionList"></select>
+				  </div>
+					<div class="col-sm-8"></div>
+			  </div>
+			  <div class="form-group col-xs-12">
+				<label class="control-label col-sm-1" for="productAreaList">Area:</label>
+				<div class="col-sm-3">
+					<select class="form-control" id="productAreaList"></select>
+				  </div>
+				<div class="col-sm-8"></div>
+			  </div>
+			  <div class="form-group col-xs-12">
+				<label class="control-label col-sm-1" for="productOrder">Order:</label>
+				<div class="col-sm-3">
+				  <input type="text" class="form-control" id="productOrder" >
+				</div>
+				<div class="col-sm-8"></div>
+			  </div>
+			  <div class="form-group col-xs-12">
+				<label class="control-label col-sm-1" for="productStoreList">Store:</label>
+				<div class="col-sm-3">
+					<select class="form-control" id="productStoreList"></select>
+				  </div>
+				<div class="col-sm-8"></div>
+			  </div>
+				<div class="form-group col-xs-12">
+			  <div class="col-sm-offset-1 col-sm-11">
+				<div class="checkbox">
+				  <label><input type="checkbox" id="productActive"> Active</label>
+				</div>
+			  </div>
+			</div>
+			<div class="form-group col-xs-12">
+			  <div class="col-sm-offset-1 col-sm-11">
+				<button class="btn btn-primary" onclick="AddEdit()" type="button">Save Data</button>
+			  </div>
+			</div>
+		  </form>
+		<hr>
+		<div class="form-group col-xs-12">
+			<label hidden="true" id="sortField">id_asc</label>
+			<div class="checkbox col-sm-2" style="padding-left: 10px">
+				<label><input type="checkbox" id="showInactive" onclick="GetAll()"> Show Inactive</label>
+			</div>
+			<div class="col-sm-offset-9 col-sm-1">
+				<button class="btn btn-primary" onclick="GetAll()" type="button" style="right:10px; position:absolute">Refresh</button>
+			</div>
+		</div>
+		<div id="dataTable" class="col-xs-12" style="padding: 10px"></div>
+		<div class="modal"><!-- Place at bottom of page --></div>
+	</body>
+</html>

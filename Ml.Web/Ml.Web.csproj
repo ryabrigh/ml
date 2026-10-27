@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A099A052-DF15-4FCA-8869-3D11176800E9}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>Rby.Web</RootNamespace>
     <AssemblyName>Rby.Web</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -32,36 +32,67 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="css\bootstrap.min.css.map" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="crudlambdajs.txt" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\font-awesome.min.css" />
     <Content Include="css\site.css" />
-    <Content Include="linq.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index.html" />
-    <Content Include="index.js" />
-    <Content Include="rby.web.footer.html" />
-    <Content Include="rby.web.footer.js" />
-    <Content Include="rby.web.play.html" />
-    <Content Include="rby.web.play.js" />
-    <Content Include="rby.web.standings.html" />
-    <Content Include="rby.web.standings.js" />
-    <Content Include="rby.web.tooltip.js" />
-    <Content Include="rby.web.todaysgames.html" />
-    <Content Include="rby.web.todaysgames.js" />
-    <Content Include="rby.web.testdata.js" />
-    <Content Include="rby.web.shared.js" />
     <Content Include="jquery-3.6.1.js" />
-    <Content Include="rby.web.menu.html" />
-    <Content Include="rby.web.menu.js" />
-    <Content Include="rby.web.schedule.html" />
-    <Content Include="rby.web.schedule.js" />
-    <Content Include="rby.web.healthcheck.html" />
-    <Content Include="rby.web.healthcheck.js" />
+    <Content Include="ml_addmptolist.html" />
+    <Content Include="ml_addmptolist.js" />
+    <Content Include="ml_test.html" />
+    <Content Include="ml_test.js" />
+    <Content Include="ml_area_crud.html" />
+    <Content Include="ml_area_crud.js" />
+    <Content Include="ml_depletion.html" />
+    <Content Include="ml_depletion.js" />
+    <Content Include="ml_inventory.html" />
+    <Content Include="ml_inventory.js" />
+    <Content Include="ml_meal.html" />
+    <Content Include="ml_meal.js" />
+    <Content Include="ml_meallist.html" />
+    <Content Include="ml_meallist.js" />
+    <Content Include="ml_mealplan.html" />
+    <Content Include="ml_mealplan.js" />
+    <Content Include="ml_mealplan_items.html" />
+    <Content Include="ml_mealplan_items.js" />
+    <Content Include="ml_portion_crud.html" />
+    <Content Include="ml_portion_crud.js" />
+    <Content Include="ml_product_crud.html" />
+    <Content Include="ml_product_crud.js" />
+    <Content Include="ml_shoplist.html" />
+    <Content Include="ml_shoplist.js" />
+    <Content Include="ml_shoplist_items.html" />
+    <Content Include="ml_shoplist_items.js" />
+    <Content Include="ml_shoplist_print.html" />
+    <Content Include="ml_shoplist_print.js" />
+    <Content Include="ml_shoplist_report.html" />
+    <Content Include="ml_shoplist_report.js" />
+    <Content Include="ml_spec.txt" />
+    <Content Include="ml_store_crud.html" />
+    <Content Include="ml_store_crud.js" />
+    <Content Include="python\jsontests.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="css\bootstrap.min.css.map" />
+    <None Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="fonts\glyphicons-halflings-regular.woff" />
+    <None Include="fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="python\portiondelete.py" />
+    <None Include="python\portionget.py" />
+    <None Include="python\portiongetbyid.py" />
+    <None Include="python\portionput.py" />
+    <None Include="python\productget.py" />
+    <None Include="s3sync.log" />
+    <None Include="s3syncTOs3.bat" />
+    <None Include="syncFROMs3.bat" />
+    <None Include="web.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

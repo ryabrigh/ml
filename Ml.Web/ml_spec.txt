@@ -1,0 +1,57 @@
+db:
+
+table: Product
+partition: id
+name
+amount
+portionId
+areaId
+order
+storeId
+
+table: Portion
+partition: id
+name
+
+table: Area
+partition: id
+name
+order
+
+table: Store
+partition: id
+name
+
+table: ML
+partition: id
+name
+selected bool
+mLtypeId
+
+table: MLType
+partition: id
+name
+
+table: MLToProduct
+partition: id
+mlId
+productId
+amount
+portionId
+active bool
+
+lambda:
+crud all tables
+
+minimise code in js, so lamda/API functions to:
+ - select/deselect a ML
+ - add a ML and link to Prods, portions etc.
+ - get total list of Prods for selected MLs
+ - as above but minus stored amounts
+
+website to:
+ - crud all standing data - Portion, Area, Store
+ - product Crud
+ - ML crud
+ - ML selection
+ - main list report

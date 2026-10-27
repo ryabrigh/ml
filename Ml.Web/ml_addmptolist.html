@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><title>MLAddMPToList</title>
+	<head>
+		<script src="jquery-3.6.1.js"></script>
+		<script src="ml_addmptolist.js"></script>
+		<link rel="stylesheet" href="css/site.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+	</head>
+	<body>
+		<h1 class="mlH1" id="AddMPTitle">ML Add Meal Plan To Shopping List</h1><a href="index.html" style="padding-left:10px">Back to index</a>
+		<hr>
+		<div class="row">
+			<div class="col-sm-offset-1 col-sm-1">
+				<button class="btn btn-primary" onclick="Submit()" type="button" style="padding-left: 10px;">Submit</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-offset-1 col-sm-5" style="padding: 10px">
+				<label>Shopping Lists</label>
+				<div id="dataTable" class="col-sm-12" style="padding: 10px"></div>
+			</div>
+			<div" class="col-sm-5" style="padding: 10px">
+				<label>Meal Plans</label>
+				<div id="dataTable2" class="col-sm-12" style="padding: 10px"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12" style="padding: 10px">
+				<label id="lblConflict"></label>
+				<div id="dataTable3" class="col-sm-12" style="padding: 10px"></div>
+			</div>
+		</div>
+		<div class="modal"><!-- Place at bottom of page --></div>
+	</body>
+</html>

@@ -1,4 +1,4 @@
-﻿namespace Rby.Models
+﻿namespace Ml.Models
 {
     public class NoDbAttribute : Attribute
     {

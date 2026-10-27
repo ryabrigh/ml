@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace Rby.Models
+namespace Ml.Models
 {
     public class CrudRequest
     {

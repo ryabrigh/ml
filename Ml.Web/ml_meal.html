@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"><title>MLMeal</title>
+<meta name="viewport" content="width=device-width" />
+	<head>
+		<script src="jquery-3.6.1.js"></script>
+		<script src="ml_meal.js"></script>
+		<link rel="stylesheet" href="css/site.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+	</head>
+	<body>
+		<h1 class="mlH1" id="MLItemsTitle">ML Meal</h1><a href="index.html" style="padding-left:10px">Back to index</a>
+		<hr>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-sm-offset-1 col-sm-1">
+					<button class="btn btn-primary" onclick="Submit()" type="button" style="padding-left: 10px;">Submit</button>
+				</div>
+				<div class="col-sm-1">
+					<label>Meal Types:</label>
+				</div>
+				<div class="col-sm-1">
+					<select id="mealType0"></select>
+				</div>
+				<div class="col-sm-1">
+					<select id="mealType1"></select>
+				</div>
+				<div class="col-sm-1">
+					<select id="mealType2"></select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div id="dataTable" class="col-sm-offset-1 col-sm-5" style="padding: 10px"></div>
+			<div class="col-sm-5" style="padding: 10px">
+				<div class="col-sm-12" id="dataTableSelected" style="padding-bottom: 20px"></div>
+				<div class="form-group">
+					<label class="control-label col-sm-12" for="mealParse">Parse:</label>
+					<div class="col-sm-12" style="padding-bottom: 20px">
+					  <textarea class="form-control" id="mealParse" rows="20"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-sm-offset-1 col-sm-1">
+							<button class="btn btn-primary" onclick="Parse()" type="button">Parse</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal"><!-- Place at bottom of page --></div>
+	</body>
+</html>

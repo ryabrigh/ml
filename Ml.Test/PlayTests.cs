@@ -1,13 +1,13 @@
-﻿using Rby.Service;
-using Rby.Data;
-using Rby.Models;
+﻿using Ml.Service;
+using Ml.Data;
+using Ml.Models;
 using Newtonsoft.Json.Linq;
 using Amazon.Lambda.APIGatewayEvents;
 using Newtonsoft.Json;
 using Amazon.DynamoDBv2.Model;
 using System.Net;
 
-namespace Rby.Test
+namespace Ml.Test
 {
 	[TestClass]
 	public class PlayTests
