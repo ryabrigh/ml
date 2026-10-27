@@ -4,29 +4,26 @@ window.onload = function(){
 	Clear();
 }
 
-function LoadLists(){
-	$.ajax({
-		url: "https://i2myytdj3i.execute-api.eu-west-2.amazonaws.com/portions",
-		type: "GET",
-		success: function(result) {
-			portionList = result;
-			$('<option />', {value: 0, text: ""}).appendTo($("#productPortionList"));
-			for (i = 0; i < result.length; i++) {
-				var thisActive = result[i]["active"];
-				if (thisActive) {
-					$('<option />', {value: result[i]["id"], text: result[i]["name"]}).appendTo($("#productPortionList"));
-				}
-			}
-		},
-		error: function (xhr, ajaxOptions, thrownError) {
-			alert(xhr.responseText);
+function LoadPortionList(result, control) {
+	console.log(result);
+	$('<option />', { value: 0, text: "" }).appendTo($(control));
+	for (i = 0; i < result.length; i++) {
+		var thisActive = result[i]["active"];
+		if (thisActive) {
+			$('<option />', { value: result[i]["id"], text: result[i]["name"] }).appendTo($(control));
 		}
-	});
+	}
+}
+
+function LoadLists(){
+	var serviceData = { "Crud": "RA", "Id": 0, "TableName": "Portion", "CrudData": {}, "Model": "Portion", "SortField": "id" };
+	request = { "serviceType": "CRUD", "serviceData": serviceData };
+	CallApi(request, LoadPortionList, "#productPortionList");
+
 	$.ajax({
 		url: "https://i2myytdj3i.execute-api.eu-west-2.amazonaws.com/areas",
 		type: "GET",
 		success: function(result) {
-			portionList = result;
 			$('<option />', {value: 0, text: ""}).appendTo($("#productAreaList"));
 			for (i = 0; i < result.length; i++) {
 				var thisActive = result[i]["active"];
@@ -43,7 +40,6 @@ function LoadLists(){
 		url: "https://i2myytdj3i.execute-api.eu-west-2.amazonaws.com/stores",
 		type: "GET",
 		success: function(result) {
-			portionList = result;
 			$('<option />', {value: 0, text: ""}).appendTo($("#productStoreList"));
 			for (i = 0; i < result.length; i++) {
 				var thisActive = result[i]["active"];

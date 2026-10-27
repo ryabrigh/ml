@@ -1,0 +1,23 @@
+http-api-rbml (i2myytdj3i) is the API endpoint
+
+following integrations:
+
+Integration names are the same as the Python names i.e. Product_Put integration goes to Product_Put lambda
+
+routes to integrations:
+/areas 		PUT 	>	Area_Put
+		GET	>	Area_Get
+/areas/{id}	GET	>	Area_GetById
+		DELETE	>	Area_Delete
+
+ALL FOLLOW MORE OR LESS THE ABOVE PATTERN EXCEPT:
+
+/listproducts	PUT	>	ListProduct_Put
+/mealplans	PUT	>	MealPlan_Put
+/mealplans/{plan}	GET	>	MealPlan_Get
+/mealproducts GET and /mealproducts/{id} GET both call MealProduct_Get
+/products PUT calls Product_Put and /products/update PUT calls Product_Update
+/products/sort/{sort} GET calls Product_Get but likely with a sort param
+/shoplists/param/{param} GET calls ListProduct_Get
+/shoplists/submit PUT calls SubmitShopList
+

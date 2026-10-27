@@ -69,75 +69,74 @@ function GetItem(id){
 	});
 }
 
-function GetAll(){
-	var showInactive = $("#showInactive")[0].checked;
-	$.ajax({
-		url: "https://i2myytdj3i.execute-api.eu-west-2.amazonaws.com/shoplists",
-		type: "GET",
-		success: function(result) {
-			$("#dataTable").html("");
-			var table = document.createElement("table"), row, cellA;
-			table.classList.add("mltable");
-			document.getElementById("dataTable").appendChild(table);
-			var header = table.createTHead();
-			var headerRow = header.insertRow(0);
-			cellA = document.createElement("th");
-			cellA.innerHTML = "ID";
-			headerRow.appendChild(cellA);
-			cellA = document.createElement("th");
-			cellA.innerHTML = "DATE";
-			headerRow.appendChild(cellA);
-			cellA = document.createElement("th");
-			cellA.style.width = "5%";
-			headerRow.appendChild(cellA);
-			cellA = document.createElement("th");
-			cellA.style.width = "5%";
-			headerRow.appendChild(cellA);
-			
-			var body = table.createTBody(0);
-			for (i = 0; i < result.length; i++) {
-				var thisActive = result[i]["active"];
-				if (showInactive || thisActive) {
-					row = body.insertRow();
-					var thisId;
-					var thisDate;
-					cellA = row.insertCell();
-					thisId = result[i]["id"];
-					//console.log(result[i]["listDate"].trim());
-					cellA.setAttribute('onclick', 'GoToListPage(' + thisId + ',"' + result[i]["listDate"].trim() + '")');
-					cellA.onmouseover = function() {
-						this.style.backgroundColor = "lightgrey";
-					}
-					cellA.onmouseout = function() {
-						this.style.backgroundColor = "white";
-					}
-					cellA.innerHTML = thisId;
-					if (!thisActive) {cellA.style.backgroundColor = "lightgrey";}
-					cellA = row.insertCell();
-					thisDate = result[i]["listDate"].trim();
-					cellA.innerHTML = thisDate;
-					if (!thisActive) {cellA.style.backgroundColor = "lightgrey";}
-					cellA = row.insertCell();
-					cellA.style.width = "10%";
-					var icon = thisActive ? "trash" : "plus";
-					cellA.innerHTML = '<button type="button" onclick="SaveData(\'' + thisId + '\', \'' + thisDate + 
-					'\', ' + !thisActive + ')" class="btn btn-default">' +
-					'<span class="glyphicon glyphicon-' + icon + '" /></button>';
-					cellA = row.insertCell();
-					cellA.style.width = "10%";
-					var icon = "remove";
-					cellA.innerHTML = '<button type="button" onclick="DeleteItem(\'' + thisId + '\')" class="btn btn-default">' +
-					'<span class="glyphicon glyphicon-' + icon + '" /></button>';
-				}
-			}
-			$("table td").addClass("mlcell");
-			$("table th").addClass("mlheadercell");
-		},
-		error: function (xhr, ajaxOptions, thrownError) {
-			alert(xhr.responseText);
-		}
-	});
+function GetAll() {
+	var serviceData = { "Crud": "RA", "Id": 0, "TableName": "ShopList", "CrudData": {}, "Model": "ShopList" };
+	request = { "serviceType": "CRUD", "serviceData": serviceData };
+	CallApi(request, ShowAll);
 }
+
+function ShowAll(result) {
+	var showInactive = $("#showInactive")[0].checked;
+	$("#dataTable").html("");
+	var table = document.createElement("table"), row, cellA;
+	table.classList.add("mltable");
+	document.getElementById("dataTable").appendChild(table);
+	var header = table.createTHead();
+	var headerRow = header.insertRow(0);
+	cellA = document.createElement("th");
+	cellA.innerHTML = "ID";
+	headerRow.appendChild(cellA);
+	cellA = document.createElement("th");
+	cellA.innerHTML = "DATE";
+	headerRow.appendChild(cellA);
+	cellA = document.createElement("th");
+	cellA.style.width = "5%";
+	headerRow.appendChild(cellA);
+	cellA = document.createElement("th");
+	cellA.style.width = "5%";
+	headerRow.appendChild(cellA);
+
+	var body = table.createTBody(0);
+	for (i = 0; i < result.length; i++) {
+		var thisActive = result[i]["active"];
+		//console.log(result[i]);
+		if (showInactive || thisActive) {
+			row = body.insertRow();
+			var thisId;
+			var thisDate;
+			cellA = row.insertCell();
+			thisId = result[i]["id"];
+			//console.log(result[i]["listDate"].trim());
+			cellA.setAttribute('onclick', 'GoToListPage(' + thisId + ',"' + result[i]["listDate"].trim() + '")');
+			cellA.onmouseover = function () {
+				this.style.backgroundColor = "lightgrey";
+			}
+			cellA.onmouseout = function () {
+				this.style.backgroundColor = "white";
+			}
+			cellA.innerHTML = thisId;
+			if (!thisActive) { cellA.style.backgroundColor = "lightgrey"; }
+			cellA = row.insertCell();
+			thisDate = result[i]["listDate"].trim();
+			cellA.innerHTML = thisDate;
+			if (!thisActive) { cellA.style.backgroundColor = "lightgrey"; }
+			cellA = row.insertCell();
+			cellA.style.width = "10%";
+			var icon = thisActive ? "trash" : "plus";
+			cellA.innerHTML = '<button type="button" onclick="SaveData(\'' + thisId + '\', \'' + thisDate +
+				'\', ' + !thisActive + ')" class="btn btn-default">' +
+				'<span class="glyphicon glyphicon-' + icon + '" /></button>';
+			cellA = row.insertCell();
+			cellA.style.width = "10%";
+			var icon = "remove";
+			cellA.innerHTML = '<button type="button" onclick="DeleteItem(\'' + thisId + '\')" class="btn btn-default">' +
+				'<span class="glyphicon glyphicon-' + icon + '" /></button>';
+		}
+	}
+	$("table td").addClass("mlcell");
+	$("table th").addClass("mlheadercell");
+}
+
 
 function DeleteItem(id){
 	$.ajax({

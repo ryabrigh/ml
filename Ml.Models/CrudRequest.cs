@@ -9,5 +9,6 @@ namespace Ml.Models
         public required string TableName { get; set; }
         public required JToken CrudData { get; set; }
         public required string Model {  get; set; }
+        public string SortField { get; set; } = "";
     }
 }

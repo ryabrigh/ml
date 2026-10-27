@@ -22,7 +22,7 @@ public class Function
     {
         context.Logger.LogInformation(request.Body);
         APIGatewayProxyResponse response = new();
-        RbyServiceBLL _serviceBLL = new(new RepositoryDynamo());
+        MlServiceBLL _serviceBLL = new(new RepositoryDynamo());
 
         var serviceRequest = JsonConvert.DeserializeObject<ServiceRequest>(request.Body);
 
@@ -42,29 +42,9 @@ public class Function
                 response.StatusCode = 200;
                 response.Body = "Lambda function exists";
                 break;
-            case "HealthCheck":
-                context.Logger.LogInformation("HealthCheck request received");
-                response = _serviceBLL.GetHealthCheck(serviceRequest.ServiceData, context).GetAwaiter().GetResult();
-                break;
             case "CRUD":
                 context.Logger.LogInformation("CRUD request received");
                 response = _serviceBLL.Crud(serviceRequest.ServiceData, context).GetAwaiter().GetResult();
-                break;
-            case "Schedule":
-                context.Logger.LogInformation("Schedule request received");
-                response = _serviceBLL.Schedule(serviceRequest.ServiceData, context).GetAwaiter().GetResult();
-                break;
-            case "TodaysGames":
-                context.Logger.LogInformation("TodaysGames request received");
-                response = _serviceBLL.TodaysGames(serviceRequest.ServiceData, context).GetAwaiter().GetResult();
-                break;
-            case "PlayGame":
-                context.Logger.LogInformation("PlayGame request received");
-                response = _serviceBLL.PlayGame(serviceRequest.ServiceData, context).GetAwaiter().GetResult();
-                break;
-            case "Standings":
-                context.Logger.LogInformation("Standings request received");
-                response = _serviceBLL.Standings(serviceRequest.ServiceData, context).GetAwaiter().GetResult();
                 break;
             default:
                 string message = "Invalid service type received";
