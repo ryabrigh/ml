@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<title>Schedule</title>
+<meta name="viewport" content="width=device-width" />
+<html lang="en">
+<head>
+    <script src="jquery-3.6.1.js"></script>
+    <script src="rby.web.schedule.js"></script>
+    <script src="rby.web.shared.js"></script>
+    <script src="rby.web.testdata.js"></script>
+    <script src="rby.web.tooltip.js"></script>
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+    <div class="col-sm-12">
+        <div class="col-sm-2">
+            <label id="season" class="rbcontentheader"></label>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="col-sm-1">
+            <label class="rblabellink" onclick="SchedulePrevious()">&laquo;</label>
+        </div>
+        <div class="col-sm-1">
+            <label class="rblabellink" onclick="ScheduleNext()">&raquo;</label>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div id="dataTable" class="col-sm-4 rbvertical-scroll" style="padding: 10px"></div>
+        <div class="col-sm-1"></div>
+        <div id="toolTipBox" class="col-sm-2 rbtooltip">
+            <div class="col-sm-6">
+                <label id="toolTipTm1"></label>
+            </div>
+            <div class="col-sm-6">
+                <label id="toolTipTm2"></label>
+            </div>
+        </div>
+    </div>
+    <div class="modal"><!-- Place at bottom of page --></div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<title>Schedule</title>
+<meta name="viewport" content="width=device-width" />
+<html lang="en">
+<head>
+    <script src="jquery-3.6.1.js"></script>
+    <script src="linq.min.js"></script>
+    <script src="rby.web.play.js"></script>
+    <script src="rby.web.shared.js"></script>
+    <script src="rby.web.testdata.js"></script>
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+    <div class="col-sm-8" style="padding: 10px"><label id="gameScore" class="rbcontentheader"></label></div>
+    <div class="col-sm-4" style="padding: 10px">
+        <label id="returnToTodaysGames" class="rbcontentheaderyellow rbinvisible" onclick="ReturnToTodaysGames()">Return to today's games</label>
+    </div>
+    <div class="col-sm-2">
+        <label class="rblabellink" onclick="Play()">Play</label>
+    </div>
+    <div class="col-sm-2">
+        <label class="rblabellink" onclick="pauseTimer()">Pause</label>
+    </div>
+    <div class="col-sm-2">
+        <label class="rblabellink" onclick="Slower()">&laquo; Slower</label>
+    </div>
+    <div class="col-sm-2">
+        <label class="rblabellink" onclick="Faster()">Faster &raquo;</label>
+    </div>
+    <div class="col-sm-2">
+        <div class="slidecontainer">
+            <input type="range" min="100" max="2000" value="750" class="slider" id="speedslider">
+        </div>
+    </div>
+    <div>
+        <label id="speed"></label>
+    </div>
+    <hr />
+    <div class="col-sm-12">
+        <div class="col-sm-4 rbgameevents">
+            <label id="gameEvents"></label>
+        </div>
+        <div class="col-sm-8">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-8">
+                <div id="timer" class="col-sm-12 rbtime">00</div>
+                <div class="col-sm-12 rbcurrentevent">
+                    <label id="currentEvent" class="rbcurrenteventlabel"></label>
+                </div>
+                <div class="col-sm-12 rbcurrentpos no-padding" id="posBar">
+                    <div class="rbleftpos" id="leftpos"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal"><!-- Place at bottom of page --></div>
+</body>
+</html>

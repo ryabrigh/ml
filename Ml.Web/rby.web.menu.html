@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<title>Rby.Web</title>
+<meta name="viewport" content="width=device-width" />
+<html lang="en">
+<head>
+    <script src="jquery-3.6.1.js"></script>
+    <script src="rby.web.menu.js"></script>
+    <script src="rby.web.shared.js"></script>
+    <script src="rby.web.testdata.js"></script>
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+    <div class="rbmenu">
+        <div class="rbmenuoptions">
+            <div class="rbmenulink">
+                <label id="TodaysGamesMenu" onclick="Nav('rby.web.todaysgames.html',LoadTodaysGames)">Today's Games</label>
+            </div>
+            <div class="rbmenulink">
+                <label id="ScheduleMenu" onclick="Nav('rby.web.schedule.html',LoadSchedule)">Schedule</label>
+            </div>
+            <div class="rbmenulink">
+                <label id="StandingsMenu" onclick="Nav('rby.web.standings.html',LoadStandings)">Standings</label>
+            </div>
+            <div class="rbmenulink">
+                <label onclick="Nav('rby.web.healthcheck.html',LoadHealthCheck)">HealthCheck</label>
+            </div>
+        </div>
+        <div class="col-sm-3">
+        </div>
+        <div class="rbpaddiv col-sm-6">
+            <button class="rbbutton" onclick="Proceed()">Proceed</button>
+            <!--<button onclick="SaveGame()">Save Game</button>-->
+        </div>
+        <div class="rbpaddiv col-sm-12">
+            <label id="NextGame" class="rblabel"></label>
+        </div>
+        <div class="col-sm-2">
+        </div>
+        <div class="rbpaddiv col-sm-8">
+            <button id="CreateSchedule" class="rbbutton" onclick="CreateSchedule()" hidden="hidden">Create New Season</button>
+        </div>
+    </div>
+    <div class="modal"><!-- Place at bottom of page --></div>
+</body>
+</html>

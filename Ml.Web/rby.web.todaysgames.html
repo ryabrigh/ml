@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<title>Today's Games'</title>
+<meta name="viewport" content="width=device-width" />
+<html lang="en">
+<head>
+    <script src="jquery-3.6.1.js"></script>
+    <script src="rby.web.todaysgames.js"></script>
+    <script src="rby.web.play.js"></script>
+    <script src="rby.web.shared.js"></script>
+    <script src="rby.web.testdata.js"></script>
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+    <div class="col-sm-12">
+        <div class="col-sm-3">
+            <label id="GmDate" class="rbcontentheader"></label>
+        </div>
+        <div class="col-sm-2">
+            <label id="playAllButton" class="rblabellink" onclick="PlayAll()" hidden="hidden">Play All</label>
+        </div>
+    </div>
+    <div id="dataTable" class="col-sm-9" style="padding: 10px"></div>
+    <div class="col-sm-12 rbpaddiv"></div>
+    <div class="modal"><!-- Place at bottom of page --></div>
+</body>
+</html>

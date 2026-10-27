@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A099A052-DF15-4FCA-8869-3D11176800E9}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Rby.Web</RootNamespace>
+    <AssemblyName>Rby.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="css\bootstrap.min.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\site.css" />
+    <Content Include="linq.min.js" />
+    <Content Include="index.html" />
+    <Content Include="index.js" />
+    <Content Include="rby.web.footer.html" />
+    <Content Include="rby.web.footer.js" />
+    <Content Include="rby.web.play.html" />
+    <Content Include="rby.web.play.js" />
+    <Content Include="rby.web.standings.html" />
+    <Content Include="rby.web.standings.js" />
+    <Content Include="rby.web.tooltip.js" />
+    <Content Include="rby.web.todaysgames.html" />
+    <Content Include="rby.web.todaysgames.js" />
+    <Content Include="rby.web.testdata.js" />
+    <Content Include="rby.web.shared.js" />
+    <Content Include="jquery-3.6.1.js" />
+    <Content Include="rby.web.menu.html" />
+    <Content Include="rby.web.menu.js" />
+    <Content Include="rby.web.schedule.html" />
+    <Content Include="rby.web.schedule.js" />
+    <Content Include="rby.web.healthcheck.html" />
+    <Content Include="rby.web.healthcheck.js" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
