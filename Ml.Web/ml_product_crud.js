@@ -4,8 +4,7 @@ window.onload = function(){
 	Clear();
 }
 
-function LoadPortionList(result, control) {
-	console.log(result);
+function LoadList(result, control) {
 	$('<option />', { value: 0, text: "" }).appendTo($(control));
 	for (i = 0; i < result.length; i++) {
 		var thisActive = result[i]["active"];
@@ -18,40 +17,15 @@ function LoadPortionList(result, control) {
 function LoadLists(){
 	var serviceData = { "Crud": "RA", "Id": 0, "TableName": "Portion", "CrudData": {}, "Model": "Portion", "SortField": "id" };
 	request = { "serviceType": "CRUD", "serviceData": serviceData };
-	CallApi(request, LoadPortionList, "#productPortionList");
+	CallApi(request, LoadList, "#productPortionList");
 
-	$.ajax({
-		url: "https://i2myytdj3i.execute-api.eu-west-2.amazonaws.com/areas",
-		type: "GET",
-		success: function(result) {
-			$('<option />', {value: 0, text: ""}).appendTo($("#productAreaList"));
-			for (i = 0; i < result.length; i++) {
-				var thisActive = result[i]["active"];
-				if (thisActive) {
-					$('<option />', {value: result[i]["id"], text: result[i]["name"]}).appendTo($("#productAreaList"));
-				}
-			}
-		},
-		error: function (xhr, ajaxOptions, thrownError) {
-			alert(xhr.responseText);
-		}
-	});
-	$.ajax({
-		url: "https://i2myytdj3i.execute-api.eu-west-2.amazonaws.com/stores",
-		type: "GET",
-		success: function(result) {
-			$('<option />', {value: 0, text: ""}).appendTo($("#productStoreList"));
-			for (i = 0; i < result.length; i++) {
-				var thisActive = result[i]["active"];
-				if (thisActive) {
-					$('<option />', {value: result[i]["id"], text: result[i]["name"]}).appendTo($("#productStoreList"));
-				}
-			}
-		},
-		error: function (xhr, ajaxOptions, thrownError) {
-			alert(xhr.responseText);
-		}
-	});
+	var serviceData = { "Crud": "RA", "Id": 0, "TableName": "Area", "CrudData": {}, "Model": "Area", "SortField": "id" };
+	request = { "serviceType": "CRUD", "serviceData": serviceData };
+	CallApi(request, LoadList, "#productAreaList");
+
+	var serviceData = { "Crud": "RA", "Id": 0, "TableName": "Store", "CrudData": {}, "Model": "Store", "SortField": "id" };
+	request = { "serviceType": "CRUD", "serviceData": serviceData };
+	CallApi(request, LoadList, "#productStoreList");
 }
 
 $(document).on({
@@ -88,54 +62,53 @@ function AddEdit(){
 	SaveData(id, name, active, order, amount, area, portion, store);
 }
 
-function SaveData(id, name, active, order, amount, area, portion, store){
-	var jsonData;
+function SaveData(id, name, active, order, amount, area, portion, store) {
+	var crudData;
+	var crudType = "U";
 
-	if (id == ""){
-		jsonData = JSON.stringify({ name: {"S": name}, order: {"N":order}, amount: {"N":amount}, area: {"N":area}, portion: {"N":portion},
-		store: {"N":store} });
-	} else {
-		jsonData = JSON.stringify({ id: {"N": id}, name: {"S": name}, active: {"BOOL": active}, order: {"N":order}, amount: {"N":amount},
-		 area: {"N":area}, portion: {"N":portion}, store: {"N":store} });
-	}
-	
-	$.ajax({
-		url: "https://i2myytdj3i.execute-api.eu-west-2.amazonaws.com/products",
-		type: "PUT",
-		data: jsonData,
-		contentType: "application/json",
-		success: function(result) {
-			//GetAll();
-			Clear();
-		},
-		error: function (xhr, ajaxOptions, thrownError) {
-			alert(xhr.responseText);
-		}
+	if (id == "") {
+		crudType = "C";
+		id = 0;
+	};
+	jsonData = JSON.stringify({
+		id: { "N": id }, name: { "S": name }, active: { "BOOL": active }, order: { "N": order }, amount: { "N": amount },
+		area: { "N": area }, portion: { "N": portion }, store: { "N": store }
 	});
+
+	var serviceData = {
+		"Crud": crudType, "Id": id, "TableName": "Product",
+		"CrudData": {
+			"id": id, "name": name, "active": active, "order": order, "amount": amount, "area": area, "portion": portion, "store": store
+		}, "Model": "Product"
+	};
+	var request = { "serviceType": "CRUD", "serviceData": serviceData };
+	CallApi(request, Saved, "", "text");
 }
 
-function GetItem(id){
-	$.ajax({
-		url: "https://i2myytdj3i.execute-api.eu-west-2.amazonaws.com/products/" + id,
-		type: "GET",
-		success: function(result) {
-			if (result == ""){	
-				alert("No product found for ID " + id);
-			} else {
-				$("#productId").val(result.id.N);
-				$("#productName").val(result.name.S);
-				$("#productOrder").val(result.order.N);
-				$("#productActive").prop('checked', result.active.BOOL);
-				$("#productAmount").val(result.amount.N);
-				$("#productAreaList").val(result.area.N).change();
-				$("#productPortionList").val(result.portion.N).change();
-				$("#productStoreList").val(result.store.N).change();
-			}
-		},
-		error: function (xhr, ajaxOptions, thrownError) {
-			alert(xhr.responseText);
-		}
-	});
+function Saved(result) {
+	alert("Product saved successfully");
+	Clear();
+}
+
+function LoadItem(result) {
+	if (result == "") {
+		alert("No product found for ID " + id);
+	} else {
+		$("#productId").val(result.id.N);
+		$("#productName").val(result.name.S);
+		$("#productOrder").val(result.order.N);
+		$("#productActive").prop('checked', result.active.BOOL);
+		$("#productAmount").val(result.amount.N);
+		$("#productAreaList").val(result.area.N).change();
+		$("#productPortionList").val(result.portion.N).change();
+		$("#productStoreList").val(result.store.N).change();
+	}
+}
+
+function GetItem(id) {
+	var serviceData = { "Crud": "R", "Id": id, "TableName": "Product", "CrudData": {}, "Model": "Product" };
+	request = { "serviceType": "CRUD", "serviceData": serviceData };
+	CallApi(request, LoadItem);
 }
 
 function GetAll(){

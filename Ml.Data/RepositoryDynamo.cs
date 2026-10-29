@@ -198,6 +198,9 @@ namespace Ml.Data
                             case TypeCode.Int32:
                                 thisType.GetProperty(propertyInfo.Name)?.SetValue(item, int.Parse(row[propertyInfo.Name].N));
                                 break;
+                            case TypeCode.Decimal:
+                                thisType.GetProperty(propertyInfo.Name)?.SetValue(item, Decimal.Parse(row[propertyInfo.Name].N));
+                                break;
                             case TypeCode.DateTime:
                                 thisType.GetProperty(propertyInfo.Name)?.SetValue(item, DateTime.Parse(row[propertyInfo.Name].S, ukFormat));
                                 break;
@@ -239,6 +242,7 @@ namespace Ml.Data
                     switch (Type.GetTypeCode(propertyInfo.PropertyType))
                     {
                         case TypeCode.Int32:
+                        case TypeCode.Decimal:
                             item.Add(propertyInfo.Name, new AttributeValue { N = typeof(T).GetProperty(propertyInfo.Name)?.GetValue(record)?.ToString() });
                             break;
                         case TypeCode.DateTime:

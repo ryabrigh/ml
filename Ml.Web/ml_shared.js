@@ -7,6 +7,7 @@ function CallApi(request, callback, target = "", returnType = "json") {
 		data: jsonData,
 		contentType: "application/json",
 		success: function (result) {
+			//console.log(result);
 			var parsedResult = result;
 			if (returnType == "json") {
 				parsedResult = JSON.parse(result);

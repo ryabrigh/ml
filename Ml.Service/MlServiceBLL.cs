@@ -96,11 +96,11 @@ namespace Ml.Service
                             response.StatusCode = 500;
                             break;
                         }
-                        T? lastItem = await repository.GetLatestRecord<T>(crudRequest.TableName, "Id");
+                        T? lastItem = await repository.GetLatestRecord<T>(crudRequest.TableName, "id");
                         int newId = 1;
                         if (lastItem != null)
                         {
-                            PropertyInfo? idProperty = thisType.GetProperty("Id");
+                            PropertyInfo? idProperty = thisType.GetProperty("id");
                             if (idProperty != null)
                             {
                                 object? idValue = idProperty.GetValue(lastItem);
@@ -111,7 +111,10 @@ namespace Ml.Service
                                 }
                             }
                         }
-                        thisType.GetProperty("Id")?.SetValue(newItem, newId);
+                        responseMessage += " newId is " + newId.ToString();
+
+                        thisType.GetProperty("id")?.SetValue(newItem, newId);
+                        responseMessage += " newItem's Id is " + thisType.GetProperty("id")?.GetValue(newItem);
                         PutItemResponse writeResponse = await repository.WriteRecord<T>(crudRequest.TableName, newItem);
                         responseMessage += "\nHttp response of write: " + writeResponse.HttpStatusCode.ToString();
                         response.StatusCode = writeResponse.HttpStatusCode.ToString() == "OK" ? 200 : 500;
