@@ -1,5 +1,5 @@
 {
-  "body": "{\"serviceType\":\"TodaysGames\", \"serviceData\":{\"Season\":\"3\", \"GmDate\":\"2028-09-08\", \"QuickCheck\":\"true\"}}",
+  "body": "{\"serviceType\":\"CRUD\", \"serviceData\":{\"Crud\":\"RA\", \"id\":\"0\", \"TableName\":\"ShopList\", \"CrudData\":{}, \"Model\":\"ShopList\", \"SortField\":\"-listDateAsDate\"}}",
   "resource": "/{proxy+}",
   "path": "/path/to/resource",
   "httpMethod": "POST",

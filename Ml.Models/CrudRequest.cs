@@ -10,5 +10,6 @@ namespace Ml.Models
         public required JToken CrudData { get; set; }
         public required string Model {  get; set; }
         public string SortField { get; set; } = "";
+        public string Join { get; set; } = "";
     }
 }

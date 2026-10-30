@@ -70,10 +70,6 @@ function SaveData(id, name, active, order, amount, area, portion, store) {
 		crudType = "C";
 		id = 0;
 	};
-	jsonData = JSON.stringify({
-		id: { "N": id }, name: { "S": name }, active: { "BOOL": active }, order: { "N": order }, amount: { "N": amount },
-		area: { "N": area }, portion: { "N": portion }, store: { "N": store }
-	});
 
 	var serviceData = {
 		"Crud": crudType, "Id": id, "TableName": "Product",
@@ -111,127 +107,124 @@ function GetItem(id) {
 	CallApi(request, LoadItem);
 }
 
-function GetAll(){
+function LoadAll(result) {
 	var showInactive = $("#showInactive")[0].checked;
-	var sortField = $("#sortField").html(); 
+	var sortField = $("#sortField").html();
 	var sortItems = sortField.split("_");
 	var sortIcon = " <span class='glyphicon glyphicon-triangle-" + (sortItems[1] == "desc" ? "bottom" : "top") + "'></span>" 
-	//console.log(sortIcon);
-	$.ajax({
-		url: "https://i2myytdj3i.execute-api.eu-west-2.amazonaws.com/products/sort/" + sortField,
-		type: "GET",
-		success: function(result) {
-			//console.log(result);
-			$("#dataTable").html("");
-			var table = document.createElement("table"), row, cellA;
-			table.classList.add("mltable");
-			document.getElementById("dataTable").appendChild(table);
-			var header = table.createTHead();
-			var headerRow = header.insertRow(0);
-			cellA = document.createElement("th");
-			var thisFieldName = "id";
-			cellA.setAttribute('onclick', 'SetSortField("' + thisFieldName + '")');
-			cellA.innerHTML = thisFieldName.toUpperCase() + (sortItems[0] == thisFieldName ? sortIcon : "") ;
-			headerRow.appendChild(cellA);
-			cellA = document.createElement("th");
-			var thisFieldName = "name";
-			cellA.setAttribute('onclick', 'SetSortField("' + thisFieldName + '")');
-			cellA.innerHTML = thisFieldName.toUpperCase() + (sortItems[0] == thisFieldName ? sortIcon : "");
-			headerRow.appendChild(cellA);
-			cellA = document.createElement("th");
-			var thisFieldName = "amount";
-			cellA.setAttribute('onclick', 'SetSortField("' + thisFieldName + '")');
-			cellA.innerHTML = thisFieldName.toUpperCase() + (sortItems[0] == thisFieldName ? sortIcon : "");
-			headerRow.appendChild(cellA);
-			cellA = document.createElement("th");
-			var thisFieldName = "portionName";
-			cellA.setAttribute('onclick', 'SetSortField("' + thisFieldName + '")');
-			cellA.innerHTML = "PORTION" + (sortItems[0] == thisFieldName ? sortIcon : "");
-			headerRow.appendChild(cellA);
-			cellA = document.createElement("th");
-			var thisFieldName = "areaName";
-			cellA.setAttribute('onclick', 'SetSortField("' + thisFieldName + '")');
-			cellA.innerHTML = "AREA" + (sortItems[0] == thisFieldName ? sortIcon : "");
-			headerRow.appendChild(cellA);
-			cellA = document.createElement("th");
-			var thisFieldName = "order";
-			cellA.setAttribute('onclick', 'SetSortField("' + thisFieldName + '")');
-			cellA.innerHTML = thisFieldName.toUpperCase() + (sortItems[0] == thisFieldName ? sortIcon : "");
-			headerRow.appendChild(cellA);
-			cellA = document.createElement("th");
-			var thisFieldName = "storeName";
-			cellA.setAttribute('onclick', 'SetSortField("' + thisFieldName + '")');
-			cellA.innerHTML = "STORE" + (sortItems[0] == thisFieldName ? sortIcon : "");
-			headerRow.appendChild(cellA);
-			cellA = document.createElement("th");
-			headerRow.appendChild(cellA);
-			
-			var body = table.createTBody(0);
-			for (i = 0; i < result.length; i++) {
-				var thisActive = result[i]["active"];
-				if (showInactive || thisActive) {
-					row = body.insertRow();
-					var thisId;
-					var thisName;
-					var thisOrder;
-					var thisAmount;
-					var thisPortion;
-					var thisArea;
-					var thisStore;
-					//need to manually do it rather than iterate to get the order we need
-					//for (let key in result[i]) {
-					cellA = row.insertCell();
-					thisId = result[i]["id"];
-					cellA.setAttribute('onclick', 'GetItem(' + thisId + ')');
-					cellA.onmouseover = function() {
-						this.style.backgroundColor = "lightgrey";
-					}
-					cellA.onmouseout = function() {
-						this.style.backgroundColor = "white";
-					}
-					cellA.innerHTML = thisId;
-					if (!thisActive) {cellA.style.backgroundColor = "lightgrey";}
-					cellA = row.insertCell();
-					thisName = result[i]["name"].trim();
-					cellA.innerHTML = thisName;
-					if (!thisActive) {cellA.style.backgroundColor = "lightgrey";}
-					cellA = row.insertCell();
-					thisAmount = result[i]["amount"];
-					cellA.innerHTML = thisAmount;
-					if (!thisActive) {cellA.style.backgroundColor = "lightgrey";}
-					cellA = row.insertCell();
-					thisPortion = result[i]["portion"];
-					cellA.innerHTML = result[i]["portionName"];
-					if (!thisActive) {cellA.style.backgroundColor = "lightgrey";}
-					cellA = row.insertCell();
-					thisArea = result[i]["area"];
-					cellA.innerHTML = result[i]["areaName"];;
-					if (!thisActive) {cellA.style.backgroundColor = "lightgrey";}
-					cellA = row.insertCell();
-					thisOrder = result[i]["order"];
-					cellA.innerHTML = thisOrder;
-					if (!thisActive) {cellA.style.backgroundColor = "lightgrey";}
-					cellA = row.insertCell();
-					thisStore = result[i]["store"];
-					cellA.innerHTML = result[i]["storeName"];
-					if (!thisActive) {cellA.style.backgroundColor = "lightgrey";}
-					cellA = row.insertCell();
-					cellA.style.width = "10%";
-					var icon = thisActive ? "trash" : "plus";
-					cellA.innerHTML = '<button type="button" onclick="SaveData(\'' + thisId + '\', \'' + thisName + 
-					'\', ' + !thisActive + ',\'' + thisOrder + '\', \'' + thisAmount + '\', \'' + thisArea + '\', \'' + thisPortion + '\', \'' +
-					thisStore + '\')" class="btn btn-default">' + '<span class="glyphicon glyphicon-' + icon + '" /></button>';
-				}
+	$("#dataTable").html("");
+	var table = document.createElement("table"), row, cellA;
+	table.classList.add("mltable");
+	document.getElementById("dataTable").appendChild(table);
+	var header = table.createTHead();
+	var headerRow = header.insertRow(0);
+	cellA = document.createElement("th");
+	var thisFieldName = "id";
+	cellA.setAttribute('onclick', 'SetSortField("' + thisFieldName + '")');
+	cellA.innerHTML = thisFieldName.toUpperCase() + (sortItems[0] == thisFieldName ? sortIcon : "");
+	headerRow.appendChild(cellA);
+	cellA = document.createElement("th");
+	var thisFieldName = "name";
+	cellA.setAttribute('onclick', 'SetSortField("' + thisFieldName + '")');
+	cellA.innerHTML = thisFieldName.toUpperCase() + (sortItems[0] == thisFieldName ? sortIcon : "");
+	headerRow.appendChild(cellA);
+	cellA = document.createElement("th");
+	var thisFieldName = "amount";
+	cellA.setAttribute('onclick', 'SetSortField("' + thisFieldName + '")');
+	cellA.innerHTML = thisFieldName.toUpperCase() + (sortItems[0] == thisFieldName ? sortIcon : "");
+	headerRow.appendChild(cellA);
+	cellA = document.createElement("th");
+	var thisFieldName = "portionName";
+	cellA.setAttribute('onclick', 'SetSortField("' + thisFieldName + '")');
+	cellA.innerHTML = "PORTION" + (sortItems[0] == thisFieldName ? sortIcon : "");
+	headerRow.appendChild(cellA);
+	cellA = document.createElement("th");
+	var thisFieldName = "areaName";
+	cellA.setAttribute('onclick', 'SetSortField("' + thisFieldName + '")');
+	cellA.innerHTML = "AREA" + (sortItems[0] == thisFieldName ? sortIcon : "");
+	headerRow.appendChild(cellA);
+	cellA = document.createElement("th");
+	var thisFieldName = "order";
+	cellA.setAttribute('onclick', 'SetSortField("' + thisFieldName + '")');
+	cellA.innerHTML = thisFieldName.toUpperCase() + (sortItems[0] == thisFieldName ? sortIcon : "");
+	headerRow.appendChild(cellA);
+	cellA = document.createElement("th");
+	var thisFieldName = "storeName";
+	cellA.setAttribute('onclick', 'SetSortField("' + thisFieldName + '")');
+	cellA.innerHTML = "STORE" + (sortItems[0] == thisFieldName ? sortIcon : "");
+	headerRow.appendChild(cellA);
+	cellA = document.createElement("th");
+	headerRow.appendChild(cellA);
+
+	var body = table.createTBody(0);
+	for (i = 0; i < result.length; i++) {
+		var thisActive = result[i]["active"];
+		if (showInactive || thisActive) {
+			row = body.insertRow();
+			var thisId;
+			var thisName;
+			var thisOrder;
+			var thisAmount;
+			var thisPortion;
+			var thisArea;
+			var thisStore;
+			//need to manually do it rather than iterate to get the order we need
+			//for (let key in result[i]) {
+			cellA = row.insertCell();
+			thisId = result[i]["id"];
+			cellA.setAttribute('onclick', 'GetItem(' + thisId + ')');
+			cellA.onmouseover = function () {
+				this.style.backgroundColor = "lightgrey";
 			}
-			$("table td").addClass("mlcell");
-			$("table th").addClass("mlheadercell");
-		},
-		error: function (xhr, ajaxOptions, thrownError) {
-			alert(xhr.responseText);
+			cellA.onmouseout = function () {
+				this.style.backgroundColor = "white";
+			}
+			cellA.innerHTML = thisId;
+			if (!thisActive) { cellA.style.backgroundColor = "lightgrey"; }
+			cellA = row.insertCell();
+			thisName = result[i]["name"].trim();
+			cellA.innerHTML = thisName;
+			if (!thisActive) { cellA.style.backgroundColor = "lightgrey"; }
+			cellA = row.insertCell();
+			thisAmount = result[i]["amount"];
+			cellA.innerHTML = thisAmount;
+			if (!thisActive) { cellA.style.backgroundColor = "lightgrey"; }
+			cellA = row.insertCell();
+			thisPortion = result[i]["portion"];
+			cellA.innerHTML = result[i]["portionname"];
+			if (!thisActive) { cellA.style.backgroundColor = "lightgrey"; }
+			cellA = row.insertCell();
+			thisArea = result[i]["area"];
+			cellA.innerHTML = result[i]["areaname"];;
+			if (!thisActive) { cellA.style.backgroundColor = "lightgrey"; }
+			cellA = row.insertCell();
+			thisOrder = result[i]["order"];
+			cellA.innerHTML = thisOrder;
+			if (!thisActive) { cellA.style.backgroundColor = "lightgrey"; }
+			cellA = row.insertCell();
+			thisStore = result[i]["store"];
+			cellA.innerHTML = result[i]["storename"];
+			if (!thisActive) { cellA.style.backgroundColor = "lightgrey"; }
+			cellA = row.insertCell();
+			cellA.style.width = "10%";
+			var icon = thisActive ? "trash" : "plus";
+			cellA.innerHTML = '<button type="button" onclick="SaveData(\'' + thisId + '\', \'' + thisName +
+				'\', ' + !thisActive + ',\'' + thisOrder + '\', \'' + thisAmount + '\', \'' + thisArea + '\', \'' + thisPortion + '\', \'' +
+				thisStore + '\')" class="btn btn-default">' + '<span class="glyphicon glyphicon-' + icon + '" /></button>';
 		}
-	});
+	}
+	$("table td").addClass("mlcell");
+	$("table th").addClass("mlheadercell");
 }
-//id, name, active, order, amount, area, portion, store
+
+function GetAll(){
+	var serviceData = {
+		"Crud": "RJ", "Id": 0, "TableName": "Product", "CrudData": {}, "Model": "Product", "SortField": "id",
+		"Join": "Product:Portion/Area/Store:portion/portionname/id/name:area/areaname/id/name:store/storename/id/name" };
+	request = { "serviceType": "CRUD", "serviceData": serviceData };
+	CallApi(request, LoadAll);
+}
+
 function DeleteItem(id){
 	$.ajax({
 		url: "https://i2myytdj3i.execute-api.eu-west-2.amazonaws.com/products/" + id,

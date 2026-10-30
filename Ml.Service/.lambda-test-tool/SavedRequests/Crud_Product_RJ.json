@@ -1,5 +1,5 @@
 {
-  "body": "{\"serviceType\":\"HealthCheck\", \"serviceData\":{\"requestName\":\"arse\"}}",
+  "body": "{\"serviceType\":\"CRUD\", \"serviceData\":{\"Crud\":\"RJ\", \"id\":\"0\", \"TableName\":\"Product\", \"CrudData\":{}, \"Model\":\"Product\", \"SortField\":\"-id\", \"Join\":\"Product:Portion/Area/Store:portion/portionname/id/name:area/areaname/id/name:store/storename/id/name\"}}",
   "resource": "/{proxy+}",
   "path": "/path/to/resource",
   "httpMethod": "POST",

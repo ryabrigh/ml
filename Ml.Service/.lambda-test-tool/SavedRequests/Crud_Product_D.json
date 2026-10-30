@@ -1,5 +1,5 @@
 {
-  "body": "{\"serviceType\":\"PlayGame\", \"serviceData\":{\"GameId\":\"0\",\"Mode\":\"SimpleMultiple\",\"GameIds\":[\"155\",\"156\"]}}",
+  "body": "{\"serviceType\":\"CRUD\", \"serviceData\":{\"Crud\":\"D\", \"id\":\"327\", \"TableName\":\"Product\", \"CrudData\":{}, \"Model\":\"Product\"}}",
   "resource": "/{proxy+}",
   "path": "/path/to/resource",
   "httpMethod": "POST",

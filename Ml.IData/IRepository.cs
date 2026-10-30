@@ -11,7 +11,8 @@ namespace Ml.IData
 		public Task<BatchWriteItemResponse> WriteRecords<T>(string tableName, List<T> items);
 		public Task<T?> GetRecordById<T>(int id, string tableName);
 		public Task<T?> GetTJoinedToX<T, X>(int id, string joins);
-		public static abstract IEnumerable<T> FilterByProperty<T>(IEnumerable<T> items, string? propertyName, object? value);
+		public Task<IEnumerable<T>?> GetAllTJoinedToX<T, X>(IEnumerable<T>? existingItems, string joinTable, string joins);
+        public static abstract IEnumerable<T> FilterByProperty<T>(IEnumerable<T> items, string? propertyName, object? value);
 		public Task<IEnumerable<T>> GetAllRecords<T>(string tableName);
 		public object ReadFromRow<T>(Dictionary<string, AttributeValue> row);
 		public IEnumerable<T> ReadFromRows<T>(ScanResponse allData);

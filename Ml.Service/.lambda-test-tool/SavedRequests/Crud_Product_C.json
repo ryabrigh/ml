@@ -1,5 +1,5 @@
 {
-  "body": "{\"serviceType\":\"CRUD\", \"serviceData\":{\"Crud\":\"U\", \"Id\":\"13\", \"TableName\":\"RbyTm\", \"CrudData\":{\"Id\":\"13\", \"Name\":\"TestCrudTmUpdated\", \"ActiveFrom\":\"3\"}, \"Model\":\"Team\"}}",
+  "body": "{\"serviceType\":\"CRUD\", \"serviceData\":{\"Crud\":\"C\", \"Id\":\"0\", \"TableName\":\"Product\", \"CrudData\":{\"id\": 0, \"name\": \"testproductxxx\", \"active\": \"true\", \"order\": 5, \"amount\": 0.5, \"area\": 2, \"portion\": 1, \"store\": 2}, \"Model\":\"Product\"}}",
   "resource": "/{proxy+}",
   "path": "/path/to/resource",
   "httpMethod": "POST",

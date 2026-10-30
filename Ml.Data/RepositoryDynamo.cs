@@ -27,7 +27,7 @@ namespace Ml.Data
                 TableName = tableName,
                 Key = new Dictionary<string, AttributeValue>()
                 {
-                    { "Id", new AttributeValue { N = id.ToString() } }
+                    { "id", new AttributeValue { N = id.ToString() } }
                 }
             };
 
@@ -163,6 +163,38 @@ namespace Ml.Data
 			}
             return thisItem;
         }
+
+        public async Task<IEnumerable<T>?> GetAllTJoinedToX<T, X>(IEnumerable<T>? existingItems, string joinTable, string joins)
+        {
+            var allJoinItems = await GetAllRecords<X>(joinTable);
+
+            if (existingItems != null)
+            {
+                foreach (T thisItem in existingItems)
+                {
+                    // joinSplit needs to be .. "Table1IdField/Table1NameField/Table2IdField/Table2NameField"
+                    string[] thisJoin = joins.Split("/");
+                    X? thisJoinItem = FilterByProperty<X>(
+                        allJoinItems,                                               // find in items from Table2
+                        typeof(X)?.GetProperty(thisJoin[2])?.Name,                  // where Table2IdField
+                        typeof(T)?.GetProperty(thisJoin[0])?.GetValue(thisItem))    // equals Table1IdField of T
+                        .FirstOrDefault();
+
+                    if (thisJoinItem == null)
+                    {
+                        // could not find a row in X matching the join e.g. a game has a TmId of 11 but no Team exists with that id
+                        typeof(T).GetProperty(thisJoin[1])?.SetValue(thisItem, null);               // set the value of X.Table2NameField to be null
+                    }
+                    else
+                    {
+                        object? value = typeof(X)?.GetProperty(thisJoin[3])?.GetValue(thisJoinItem);    // Get X.Table2NameField
+                        typeof(T).GetProperty(thisJoin[1])?.SetValue(thisItem, value);                   // set the value of X.Table2NameField to be value
+                    }
+                }
+            }
+            return existingItems;
+        }
+
         public static IEnumerable<T> FilterByProperty<T>(IEnumerable<T> items, string? propertyName, object? value)
         {
             ArgumentNullException.ThrowIfNull(propertyName);
@@ -299,7 +331,7 @@ namespace Ml.Data
                 TableName = tableName,
                 Key = new Dictionary<string, AttributeValue>()
                 {
-                    { "Id", new AttributeValue { N = id.ToString() } }
+                    { "id", new AttributeValue { N = id.ToString() } }
                 }
             };
 

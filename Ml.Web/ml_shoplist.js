@@ -70,7 +70,8 @@ function GetItem(id){
 }
 
 function GetAll() {
-	var serviceData = { "Crud": "RA", "Id": 0, "TableName": "ShopList", "CrudData": {}, "Model": "ShopList" };
+	var serviceData = {
+		"Crud": "RA", "Id": 0, "TableName": "ShopList", "CrudData": {}, "Model": "ShopList", "SortField": "-listDateAsDate" };
 	request = { "serviceType": "CRUD", "serviceData": serviceData };
 	CallApi(request, ShowAll);
 }

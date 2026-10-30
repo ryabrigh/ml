@@ -200,6 +200,63 @@ namespace Ml.Service
                             return response;
                         }
                         break;
+                    case "RJ":
+                        // Read all
+                        responseMessage += "\nReading all " + tType;
+                        IEnumerable<T>? joinedItems = await repository.GetAllRecords<T>(crudRequest.TableName);
+                        string[] joinTables = crudRequest.Join.Split(':')[1].Split('/');
+                        for (int i = 0; i < joinTables.Length; i++)
+                        {
+                            string joinString = crudRequest.Join.Split(':')[2 + i];
+                            switch (joinTables[i])
+                            {
+                                case "Portion":
+                                    joinedItems = await repository.GetAllTJoinedToX<T, Portion>(joinedItems, joinTables[i], joinString);
+                                    break;
+                                case "Area":
+                                    joinedItems = await repository.GetAllTJoinedToX<T, Area>(joinedItems, joinTables[i], joinString);
+                                    break;
+                                case "Store":
+                                    joinedItems = await repository.GetAllTJoinedToX<T, Store>(joinedItems, joinTables[i], joinString);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (joinedItems == null)
+                        {
+                            responseMessage += "\nNo join items found for table: " + crudRequest.TableName;
+                        }
+                        else
+                        {
+                            IEnumerable<T> sortedItems = joinedItems;
+                            if (crudRequest.SortField != "")
+                            {
+                                var sortField = crudRequest.SortField;
+                                bool descending = false;
+                                if (crudRequest.SortField[0] == '-')
+                                {
+                                    // descending
+                                    descending = true;
+                                    sortField = sortField.Substring(1);
+                                }
+                                PropertyInfo? propertyInfo = typeof(T).GetProperty(sortField);
+                                if (propertyInfo != null)
+                                {
+                                    object keySelector(T x) =>
+#pragma warning disable CS8603 // Possible null reference return.
+                                        propertyInfo.GetValue(x, null);
+#pragma warning restore CS8603 // Possible null reference return.
+
+                                    sortedItems = descending ? joinedItems.OrderByDescending(keySelector) : joinedItems.OrderBy(keySelector);
+                                }
+                            }
+                            context?.Logger.LogInformation(responseMessage);
+                            response.StatusCode = 200;
+                            response.Body = JsonConvert.SerializeObject(sortedItems);
+                            return response;
+                        }
+                        break;
                     default:
                         responseMessage += "\nInvalid crud type " + crudRequest.Crud;
                         response.StatusCode = 500;
